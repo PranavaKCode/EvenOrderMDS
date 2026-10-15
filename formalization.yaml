@@ -1,0 +1,203 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4.
+version: "v0.4"
+
+project:
+  name: "The MDS conjecture over finite fields of even order"
+  description: >-
+    A Lean 4 proof of the linear MDS conjecture for every finite field of even
+    order. For a finite field K with an even number q of elements and
+    2 ≤ k ≤ q, the maximum length of a k-dimensional linear maximum distance
+    separable (MDS) code over K is q + 2 when k = 3 or k = q − 1, and q + 1
+    otherwise; codes are subspaces of K^N and an MDS code is one whose minimum
+    Hamming distance equals N − k + 1. The upper bound is proved through the
+    correspondence between MDS codes and arcs: after puncturing and duality it
+    suffices to exclude arcs of q + 2 vectors in K^r for 4 ≤ r ≤ q/2 + 1. A
+    hypothetical such arc gives one plane arc together with r − 3 lifts that,
+    with three coordinate rows, form r linearly independent vectors; the
+    formalization proves that all lifts of a plane arc lie in one common
+    subspace of dimension at most r − 1. The proof uses an exactly normalized
+    form of Segre's envelope of the tangents, a characteristic-two derivative
+    obstruction, and a dimension bound for a colon ideal of (X^n, Y^n, Z^n)
+    with n = q/2. Extended Reed–Solomon codes and the regular hyperoval show
+    that the bound is attained.
+  # Human authors only (no AI systems); see the automation section for AI use.
+  authors:
+    - "Pranava Kumar"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Pranava Kumar"
+
+classification:
+  arxiv: [math.CO, cs.IT]
+  msc2020: [94B05, 94B65, 51E21, 51E20, 13H10, 68V20]
+
+sources:
+  - title: >-
+      A proof of the linear MDS conjecture over finite fields of even order,
+      first presented in this repository and in the accompanying report
+      docs/report.pdf
+    type: original-proof
+    relationship: other
+    note: >-
+      The common-height argument and its Lean formalization are presented here
+      for the first time; the accompanying report gives the informal proof,
+      the literature account and supporting computer checks. Novelty has not
+      been independently established (see README.md, Literature).
+  - title: "Curve razionali normali e k-archi negli spazi finiti"
+    authors: ["Beniamino Segre"]
+    type: paper
+    id: "doi:10.1007/BF02410779"
+    location: "Ann. Mat. Pura Appl. (4) 39 (1955), 357–379"
+    relationship: background
+    note: "Poses the question about the maximum size of arcs that the MDS conjecture answers."
+  - title: "The Theory of Error-Correcting Codes, Chapter 11: MDS codes"
+    authors: ["F. J. MacWilliams", "N. J. A. Sloane"]
+    type: book
+    id: "doi:10.1016/S0924-6509(08)70536-1"
+    location: "North-Holland Mathematical Library 16, North-Holland, Amsterdam, 1977, pp. 317–331"
+    relationship: background
+    note: "Standard coding-theoretic account of MDS codes and of the conjecture."
+  - title: "On sets of vectors of a finite vector space in which every subset of basis size is a basis"
+    authors: ["Simeon Ball"]
+    type: paper
+    id: "doi:10.4171/JEMS/316"
+    location: "J. Eur. Math. Soc. 14 (2012), no. 3, 733–748"
+    relationship: background
+    note: "States the conjecture (Conjecture 1.4) and proves it for prime fields."
+  - title: "Arcs in finite projective spaces"
+    authors: ["Simeon Ball", "Michel Lavrauw"]
+    type: paper
+    id: "doi:10.4171/EMSS/33"
+    location: "EMS Surv. Math. Sci. 6 (2019), no. 1/2, 133–172"
+    relationship: background
+    note: "Survey of the known cases of the conjecture, including the partial results for even q."
+  - title: "M.D.S. codes and arcs in PG(n,q) with q even: an improvement of the bounds of Bruen, Thas, and Blokhuis"
+    authors: ["Leo Storme", "Joseph A. Thas"]
+    type: paper
+    id: "doi:10.1016/0097-3165(93)90076-K"
+    location: "J. Combin. Theory Ser. A 62 (1993), no. 1, 139–154"
+    relationship: background
+    note: "Best previously known general range for even q (k < sqrt(q)/2 + 15/4)."
+  - title: "Le geometrie di Galois"
+    authors: ["Beniamino Segre"]
+    type: paper
+    id: "doi:10.1007/BF02410658"
+    location: "Ann. Mat. Pura Appl. (4) 48 (1959), 1–96"
+    relationship: background
+    note: "Segre's theorem that, for even q, the tangents of a plane arc lie on an algebraic envelope; the formalization uses an exactly normalized version."
+  - title: "Hilbert functions of graded algebras"
+    authors: ["Richard P. Stanley"]
+    type: paper
+    id: "doi:10.1016/0001-8708(78)90045-2"
+    location: "Adv. Math. 28 (1978), no. 1, 57–83"
+    relationship: background
+    note: "Symmetry and unimodality of codimension-three Gorenstein Hilbert functions; the formalization proves the case it needs directly."
+
+related_formalizations: []
+
+status:
+  scope: >-
+    Formalized: the complete statement in Challenge.lean, namely both the
+    attainment and the upper bound for the maximum length of k-dimensional
+    linear MDS codes over every finite field of even cardinality, for every
+    2 ≤ k ≤ q. Codes are submodules of Fin N → K, dimension is Module.finrank
+    and minimum distance is the attained minimum Hamming weight (Mathlib's
+    hammingNorm) of a nonzero codeword. Not formalized and not claimed: fields
+    of odd order, nonlinear codes, the elementary cases k = 1 and k > q, and
+    any classification of the codes of maximum length.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: manual
+      models: []
+      framework: "n/a"
+      tool_setup: >-
+        The mathematical argument (the common-height proof of the upper bound)
+        was devised by the author, Pranava Kumar, without automation.
+      cost:
+        wall_time: "not tracked"
+        spend_usd: "0"
+        hardware: "n/a"
+      prompting_notes: "n/a"
+    - method: other
+      models: ["Claude (Anthropic); model versions not recorded"]
+      framework: "not recorded"
+      tool_setup: >-
+        AI-assisted formalization: Claude assisted the author in translating the
+        informal proof into the original 116-module Lean 4 development (Lean
+        v4.24.0, Mathlib f897ebcf), from which this repository was ported.
+      cost:
+        wall_time: "not tracked"
+        spend_usd: "not tracked"
+        hardware: "not recorded"
+      prompting_notes: "not recorded"
+    - method: agent
+      models: ["Claude Opus 5.5"]
+      framework: "Claude Code"
+      tool_setup: >-
+        AI agent that ported the existing Lean development from Lean v4.24.0 and
+        Mathlib f897ebcf to Lean v4.35.0-rc2 and Lean's module system (renaming
+        the package to EvenOrderMDS), wrote Challenge.lean and Solution.lean,
+        assembled this repository from the Palomar template, and drafted
+        README.md, this file, the accompanying report and the supplementary
+        Python verification programs.
+      cost:
+        wall_time: "about one day"
+        spend_usd: "not tracked"
+        hardware: "local machine (Windows 11 with WSL Debian)"
+      prompting_notes: "n/a"
+  spend_usd: "not tracked"
+  notes: >-
+    Pranava Kumar devised the mathematical argument. Claude (Anthropic)
+    assisted him in translating it into Lean 4, producing the original
+    development for Lean v4.24.0. An AI agent (Claude Opus 5.5 in Claude Code)
+    then ported that development to Lean v4.35.0-rc2 and the module system,
+    wrote Challenge.lean and Solution.lean, and drafted this repository's
+    README, this metadata file, the accompanying report and the supplementary
+    Python checks. Pranava Kumar is responsible for the submission. The
+    statement was audited against the standard conjecture and the proof checked
+    by Comparator; no independent human expert has reviewed the mathematics.
+
+fidelity:
+  divergences: >-
+    None known relative to the standard statement of the conjecture for even q
+    (Ball 2012, Conjecture 1.4; MacWilliams–Sloane, Chapter 11). The
+    conjecture's range 2 ≤ k ≤ q is kept in full; the theorem states the exact
+    maximum, so it also covers the exceptional dimensions 3 and q − 1. "Even
+    order" is expressed as Even (Fintype.card K), equivalent to characteristic
+    two.
+
+review:
+  status: agent-reviewed
+  reviewers:
+    - "Claude Opus 5.5 (AI agent): statement audit against the standard conjecture and supporting computer checks"
+  notes: >-
+    The Challenge statement was compared with the formulations in Ball (2012)
+    and MacWilliams–Sloane (1977). The template's checks were run locally:
+    scripts/check-lean-sources.py passes, lake build succeeds, and
+    scripts/verify-comparator.sh reports that the proof of
+    EvenOrderMDS.maximum_length_of_MDS_code is accepted by Lean's kernel, NanoDa
+    and con-ron using only propext, Quot.sound and Classical.choice.
+    Independently of Lean, Python programs checked each lemma of
+    the informal argument on 250 explicit plane arcs over F_8, F_16, F_32 and
+    F_64 and computed the exact maximum lengths over F_2, F_4 and F_8 by
+    exhaustive search. No review by a human expert has taken place.
+
+alignment:
+  namespace: "EvenOrderMDS"
+  statements:
+    - source: "MDS conjecture for even q (Ball 2012, Conjecture 1.4); Theorem 1.1 of docs/report.pdf"
+      lean: "EvenOrderMDS.maximum_length_of_MDS_code"
+      module: "Challenge"
+      status: "proved"
+      note: >-
+        IsGreatest encodes both attainment and the upper bound; HasMinimumDistance
+        and IsMDS are the literal coding-theoretic notions.
+
+acknowledgements: >-
+  Built on Lean 4 and Mathlib. The repository layout, scripts and CI come from
+  the Palomar template (Apache-2.0).
